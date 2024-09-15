@@ -47,17 +47,18 @@ router.get('/blog/:id', async (req, res) => {
   }
 });
 
-router.get('/profile',  async (req, res) => {
+router.get('/profile',  withAuth, async (req, res) => {
   try {
-    const userData = await User.findByPk(req.session.user_id, {
+    const userData = await User.findByPk(req.session.id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Blog }],
+      
     });
 
     const user = userData.get({ plain: true });
 
     res.render('profile', {
-      ...user,
+      user: JSON.stringify(user),
       logged_in: true,
     });
   } catch (err) {
