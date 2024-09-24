@@ -15,7 +15,6 @@ router.get('/', async (req, res) => {
     });
 
     const blogs = blogData.map((blog) => blog.get({ plain: true }));
-
     res.render('homepage', {
       blogs,
       logged_in: req.session.logged_in,
@@ -49,19 +48,21 @@ router.get('/blog/:id', async (req, res) => {
 
 router.get('/profile',  withAuth, async (req, res) => {
   try {
-    const userData = await User.findByPk(req.session.id, {
+    console.log(req.session)
+    const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Blog }],
       
     });
 
     const user = userData.get({ plain: true });
-
+console.log(user)
     res.render('profile', {
-      user: JSON.stringify(user),
+      user: user,
       logged_in: true,
     });
   } catch (err) {
+    console.log(err)
     res.status(500).json(err);
   }
 });

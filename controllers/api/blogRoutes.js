@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Blog, User } = require('../../models/Blog');
+const { Blog, User } = require('../../models');
 
 // Route to get all blog posts
 router.get('/', async (req, res) => {
@@ -7,7 +7,8 @@ router.get('/', async (req, res) => {
     const blogs = await Blog.findAll();
     res.json(blogs);
   } catch (err) {
-    res.status(500).json(err);
+    console.log(err)  
+    res.status(500).send(err);
   }
 });
 

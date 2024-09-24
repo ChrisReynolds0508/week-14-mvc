@@ -8,38 +8,38 @@
   <div class="col-md-6">
     <h3>Create a New Blog Post:</h3>
 
-    <form class="form new-project-form">
+    <form class="form new-blog-form">
       <div class="form-group">
-        <label for="project-name">Blog post name:</label>
-        <input class="form-input" type="text" id="project-name" name="project-name" />
+        <label for="blog-name">Blog post name:</label>
+        <input class="form-input" type="text" id="blog-name" name="blog-name" />
       </div>
       
       <div class="form-group">
-        <label for="project-desc">content:</label>
-        <textarea class="form-input" id="project-desc" name="project-desc"></textarea>
+        <label for="blog-content">content:</label>
+        <textarea class="form-input" id="blog-content" name="blog-content"></textarea>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Create</button>
       </div>
     </form>
   </div>
-
-  {{#if blogs.length}}
-  <div class="col-md-6 project-list">
+  <div class="col-md-6 blog-list">
+    {{#if user.blogs.length}}
     <h3>Current Posts:</h3>
 
-    {{#each blogs as |blog|}}
+    {{#each user.blogs as |blog|}}
     <div class="row mb-2">
       <div class="col-md-8">
-        <h4><a href="/blog/{{blog.id}}">{{blog.name}}</a></h4>
+        <h4><a href="/blog/{{blog.id}}">{{blog.title}}</a></h4>
       </div>
       <div class="col-md-4">
         <button class="btn btn-sm btn-danger" data-id="{{blog.id}}">DELETE</button>
       </div>
     </div>
     {{/each}}
+     {{/if}}
   </div>
-  {{/if}}
+ 
 </div>
 
 <script src="./js/profile.js"></script>
